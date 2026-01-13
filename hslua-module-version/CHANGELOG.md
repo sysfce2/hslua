@@ -2,6 +2,12 @@
 
 `hslua-module-version` uses [PVP Versioning][].
 
+## hslua-module-version-1.2.0.1
+
+Released 2026-01-13.
+
+- Fix the typespec in the `Call` operation of the *Version* type.
+
 ## hslua-module-version-1.2.0
 
 Released 2026-01-08.
