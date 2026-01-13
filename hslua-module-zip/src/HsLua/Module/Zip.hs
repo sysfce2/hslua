@@ -15,7 +15,7 @@ module HsLua.Module.Zip (
   -- * Module
     documentedModule
   , description
-
+  , callOp
   -- * Zip archives
   , typeArchive
   , mkArchive
@@ -71,21 +71,11 @@ symbolicLinkEntryTarget = const Nothing
 #endif
 
 -- | The @zip@ module specification.
-documentedModule :: forall e. LuaError e => Module e
+documentedModule :: LuaError e => Module e
 documentedModule = defmodule "zip"
   `withDescription` description
   `withFunctions` functions
-  `withOperations`
-    [ operation Call $ lambda
-      ### (do
-              -- call function `zip`
-              _ <- getfield (nthBottom 1) (functionName @e zip)
-              replace (nthBottom 1)
-              nargs <- NumArgs . subtract 1 . fromStackIndex <$> gettop
-              call nargs 1
-              pure (NumResults 1))
-      =?> "new Archive"
-    ]
+  `withOperations` [ operation Call callOp ]
   `associateType` typeArchive
   `associateType` typeEntry
 
@@ -110,6 +100,18 @@ description = T.unlines
   , "    symbolic links are preserved as such. This option is ignored"
   , "    on Windows."
   ]
+
+-- | Function for the `call` operation.
+callOp :: forall e. LuaError e => DocumentedFunction e
+callOp = lambda
+  ### (do
+    -- call function `zip`
+    _ <- getfield (nthBottom 1) (functionName @e zip)
+    replace (nthBottom 1)
+    nargs <- NumArgs . subtract 1 . fromStackIndex <$> gettop
+    call nargs 1
+    pure (NumResults 1))
+  =?> "new Archive"
 
 -- | First published version of this library.
 initialVersion :: Version
