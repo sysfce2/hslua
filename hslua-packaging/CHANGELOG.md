@@ -2,6 +2,14 @@
 
 `hslua-packaging` uses [PVP Versioning][].
 
+## hslua-packaging-2.4.1
+
+Released 2026-01-13.
+
+- Modified Lua documentation objects: calling the userdata objects
+  now returns a table with all the info from the documentation
+  object.
+
 ## hslua-packaging-2.4.0
 
 Released 2026-01-08.
