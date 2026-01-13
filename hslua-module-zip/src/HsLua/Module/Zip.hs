@@ -14,6 +14,7 @@ Lua module to work with file zips.
 module HsLua.Module.Zip (
   -- * Module
     documentedModule
+  , description
 
   -- * Zip archives
   , typeArchive
@@ -71,25 +72,7 @@ symbolicLinkEntryTarget = const Nothing
 -- | The @zip@ module specification.
 documentedModule :: forall e. LuaError e => Module e
 documentedModule = defmodule "zip"
-  `withDescription` T.unlines
-    [ "Functions to create, modify, and extract files from zip archives."
-    , ""
-    , "The module can be called as a function, in which case it behaves"
-    , "like the `zip` function described below."
-    , ""
-    , "Zip options are optional; when defined, they must be a table with"
-    , "any of the following keys:"
-    , ""
-    , "  - `recursive`: recurse directories when set to `true`;"
-    , "  - `verbose`: print info messages to stdout;"
-    , "  - `destination`: the value specifies the directory in which to"
-    , "    extract;"
-    , "  - `location`: value is used as path name, defining where files"
-    , "    are placed."
-    , "  - `preserve_symlinks`: Boolean value, controlling whether"
-    , "    symbolic links are preserved as such. This option is ignored"
-    , "    on Windows."
-    ]
+  `withDescription` description
   `withFunctions` functions
   `withOperations`
     [ operation Call $ lambda
@@ -105,10 +88,31 @@ documentedModule = defmodule "zip"
   `associateType` typeArchive
   `associateType` typeEntry
 
+-- | Textual description of this module; to be used for live documentation.
+description :: T.Text
+description = T.unlines
+  [ "Functions to create, modify, and extract files from zip archives."
+  , ""
+  , "The module can be called as a function, in which case it behaves"
+  , "like the `zip` function described below."
+  , ""
+  , "Zip options are optional; when defined, they must be a table with"
+  , "any of the following keys:"
+  , ""
+  , "  - `recursive`: recurse directories when set to `true`;"
+  , "  - `verbose`: print info messages to stdout;"
+  , "  - `destination`: the value specifies the directory in which to"
+  , "    extract;"
+  , "  - `location`: value is used as path name, defining where files"
+  , "    are placed."
+  , "  - `preserve_symlinks`: Boolean value, controlling whether"
+  , "    symbolic links are preserved as such. This option is ignored"
+  , "    on Windows."
+  ]
+
 -- | First published version of this library.
 initialVersion :: Version
 initialVersion = makeVersion [1,0,0]
-
 
 --
 -- Functions
