@@ -26,6 +26,7 @@ module HsLua.Module.Zip (
   , bytestring
   -- * Zip entry
   , typeEntry
+  , mkEntry
   , peekEntryFuzzy
   -- ** entry methods
   , contents
