@@ -1,6 +1,6 @@
 cabal-version:       2.2
 name:                hslua-module-zip
-version:             1.2.0
+version:             1.2.1
 synopsis:            Lua module to work with file zips.
 description:         Module with function for creating, modifying, and
                      extracting files from zip archives.

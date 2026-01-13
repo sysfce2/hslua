@@ -2,6 +2,13 @@
 
 `hslua-module-zips` uses [PVP Versioning][].
 
+## hslua-module-zip-1.2.1
+
+Released 2026-01-13.
+
+-   Export the Lua module's `description` as `Text`. This makes it
+    easier to define a custom module.
+
 ## hslua-module-zip-1.2.0
 
 Released 2026-01-08
